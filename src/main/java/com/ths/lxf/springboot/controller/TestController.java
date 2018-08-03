@@ -6,15 +6,15 @@ import com.ths.lxf.springboot.service.TestService;
 import com.ths.lxf.springboot.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
 
-@Controller
+@RestController
 @RequestMapping("/test")
 public class TestController {
 
@@ -33,6 +33,7 @@ public class TestController {
             }
             restModel.setData(testService.getAge(age));
             restModel.setMsgCode(0);
+            logger.info("查询成功：{}",age);
             return restModel;
         } catch (MyException e) {
             restModel.setMsgCode(1);
