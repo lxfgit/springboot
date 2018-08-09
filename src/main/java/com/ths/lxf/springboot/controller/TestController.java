@@ -1,7 +1,7 @@
 package com.ths.lxf.springboot.controller;
 
 import com.ths.lxf.springboot.common.MyException;
-import com.ths.lxf.springboot.common.RestModel;
+import com.ths.lxf.springboot.common.ResultModel;
 import com.ths.lxf.springboot.service.TestService;
 import com.ths.lxf.springboot.util.StringUtil;
 import org.slf4j.Logger;
@@ -25,25 +25,25 @@ public class TestController {
 
     @RequestMapping(value = "/getAge", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public RestModel getOk(int age) {
-        RestModel restModel = new RestModel();
+    public ResultModel getOk(int age) {
+        ResultModel resultModel = new ResultModel();
         try {
             if (StringUtil.isNull(age)) {
                 throw new MyException("age不能为空");
             }
-            restModel.setData(testService.getAge(age));
-            restModel.setMsgCode(0);
+            resultModel.setData(testService.getAge(age));
+            resultModel.setMsgCode(0);
             logger.info("查询成功：{}",age);
-            return restModel;
+            return resultModel;
         } catch (MyException e) {
-            restModel.setMsgCode(1);
-            restModel.setMsg("查看失败：" + e.getMessage());
+            resultModel.setMsgCode(1);
+            resultModel.setMsg("查看失败：" + e.getMessage());
             logger.error("查看失败", e);
         } catch (Exception e) {
-            restModel.setMsgCode(1);
-            restModel.setMsg("查看失败：" + e.getMessage());
+            resultModel.setMsgCode(1);
+            resultModel.setMsg("查看失败：" + e.getMessage());
             logger.error("查看失败", e);
         }
-        return restModel;
+        return resultModel;
     }
 }
